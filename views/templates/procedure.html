@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1>{{ procedure.title }}</h1>
+            <p>{{ procedure.desc }}</p>
+            <a class="btn btn-primary" href="#/version/new?proid={{ procedure.id }}">Create New Version</a>
+            <span ng-if="verscount > 0">
+                <a class="btn btn-primary" href="#/version/list?proid={{ procedure.id }}">View Versions</a>
+            </span>
+        </div>
+        <div>
+            <div ng-repeat="version in procedure.Versions">
+                <p>Author: {{ version.author.firstName + ' ' + version.author.lastName }}</p>
+                <p>Version: {{ version.number }}</p>
+                <p>Effective Date: {{ version.effectiveDate | date:'MMMM dd, yyyy' }}</p>
+                <!--<p>Review Date: {{ version.reviewDate | date:'MMMM dd, yyyy' }}</p>-->
+                <!--<p>Approved By: {{ version.approver.firstName + ' ' + version.approver.lastName }}</p>-->
+                <hr>
+                <h3>Instruction</h3>
+                <div ng-repeat="step in version.Instructions">
+                    <p>{{ step.order }}. {{ step.instruction }}</p>
+                    <div ng-if="step.image.length > 5">
+                        <div class="text-center">
+                            <img class="instructionImage" ng-src="{{ step.image }}">
+                            <br>
+                            <span>{{ step.imageCaption }}</span>
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1>{{ section.title }}</h1>
+            <p>{{ section.desc }}</p>
+            <a class="btn btn-primary" href="#/procedure/new?secid={{ section.id }}">Add a new procedure</a>
+        </div>
+        <div>
+            <ul>
+                <li class="nostyle"><h2>Procedures</h2></li>
+            </ul>
+            <ul>
+                <li class="well nostyle" ng-repeat="procedure in section.Procedures">
+                    <a href="#/procedure/{{ procedure.id }}">
+                        <span><h3>{{ procedure.title }}
+                            <a href="#/procedure/{{ procedure.id }}/edit?secid={{ section.id }}">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a href="#/procedure/{{ procedure.id }}/delete?secid={{ section.id }}">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </h3></span>
+                    </a>
+                    <p>{{ procedure.desc }}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

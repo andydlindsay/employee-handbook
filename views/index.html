@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title><%= title %></title>
+        
+        <!-- load bootstrap, jQuery and font awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+        
+        <!-- load angular via CDN -->  
+        <script src="//code.angularjs.org/1.5.0-rc.2/angular.js"></script>  
+        <script src="//code.angularjs.org/1.5.0-rc.2/angular-route.js"></script>  
+        <script src="//code.angularjs.org/1.5.0-rc.2/angular-resource.js"></script>
+        <script src="https://code.angularjs.org/1.5.0-rc.2/angular-animate.js"></script>
+        
+        <!-- load pickadate -->
+        <script type="text/javascript" src="bower_components/pickadate/lib/picker.js"></script>
+        <script type="text/javascript" src="bower_components/pickadate/lib/picker.date.js"></script>
+        <link rel="stylesheet" href="bower_components/pickadate/lib/themes/default.css">
+        <link rel="stylesheet" href="bower_components/pickadate/lib/themes/default.date.css">
+        <script type="text/javascript" src="bower_components/aws-sdk/dist/aws-sdk.js"></script>
+        
+        <!-- load angular schema form -->
+        <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="bower_components/tv4/tv4.js"></script>
+        <script type="text/javascript" src="bower_components/objectpath/lib/ObjectPath.js"></script>
+        <script type="text/javascript" src="bower_components/angular-schema-form/dist/schema-form.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-schema-form/dist/bootstrap-decorator.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular-schema-form-datepicker/bootstrap-datepicker.min.js"></script>
+        
+        <!-- load angular app -->
+        <script src="/app/module.js"></script>
+        
+        <!-- load controllers -->
+        <script src="/app/controllers/controllers.js"></script>
+        <script src="/app/controllers/procedure.js"></script>
+        <script src="/app/controllers/category.js"></script>
+        <script src="/app/controllers/section.js"></script>
+        <script src="/app/controllers/version.js"></script>
+        
+        <!-- load services -->
+        <script src="/app/services.js"></script>
+        
+        <!-- load directives -->
+        <script src="/app/directives.js"></script>
+        
+        <!-- load custom stylesheets -->
+        <link rel="stylesheet" href="/assets/stylesheets/style.css">
+        <link rel="stylesheet" href="/assets/stylesheets/nganimate.css">
+        
+    </head>
+    <body ng-app="employeeHandbook">
+        <!-- main site navigation -->
+        <nav role="navigation" class="navbar navbar-inverse">
+            <div class="container-fluid navhead">
+                <!-- brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav-collapse" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/">Employee Handbook</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-nav-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#/about">About</a></li>
+                        <li><a href="#/howto">How to Use This App</a></li>
+                    </ul>
+                </div> <!-- navbar collapse -->
+            </div> <!-- container-fluid -->
+        </nav>
+    
+        <div class="container constyle"> 
+            <div class="" ng-view></div> 
+        </div>
+        
+        <!--comment the line below out for production environment-->
+        <script src="node_modules/api-check/dist/api-check.js"></script>
+        <!--<script src="node_modules/angular/angular.js"></script>-->
+        <script src="node_modules/angular-formly/dist/formly.js"></script>
+        <script src="node_modules/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
+        
+    </body>
+</html>

@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1>Table of Contents</h1>
+            <a class="btn btn-primary" href="#/chapter/new">Add a new chapter</a>
+        </div>
+        <ol>
+            <li class="well nostyle" ng-repeat="category in contents">
+                <a href="#/chapter/{{ category.id }}">
+                    <h3>{{ category.title }}
+                        <a href="#/chapter/{{ category.id }}/edit">
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <a href="#/chapter/{{ category.id }}/delete">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </h3>
+                </a>
+                <p>{{ category.desc }}</p>
+            </li>
+        </ol>
+    </div>
+</div>

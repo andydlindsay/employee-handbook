@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1>Edit Procedure</h1>
+        </div>
+        <form class="formcontainer" ng-submit="onSubmit()">
+            <formly-form model="procedure" fields="procedureFields" form="procedureForm">
+                <button type="submit" class="btn btn-primary" ng-disabled="procedureForm.$invalid">Save</button>
+            </formly-form>
+        </form>
+    </div>
+</div>
