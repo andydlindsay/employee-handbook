@@ -3,9 +3,11 @@
         <div class="jumbotron">
             <h1>{{ procedure.title }}</h1>
             <p>{{ procedure.desc }}</p>
-            <!-- <a class="btn btn-primary" href="#/version/new?proid={{ procedure.id }}">Create New Version</a> -->
             <span ng-if="verscount > 0">
                 <a class="btn btn-primary" href="#/version/list?proid={{ procedure.id }}">View Versions</a>
+            </span>
+            <span ng-if="verscount == 0">
+                <a class="btn btn-primary" href="#/version/new?proid={{ procedure.id }}">Create New Version</a>
             </span>
         </div>
         <div>
