@@ -10,7 +10,23 @@
             </ul>
             <ul>
                 <li class="well nostyle" ng-repeat="version in versions.Versions">
-                    {{ version }}
+                    <a href="#/version/{{ version.id }}">
+                        <span>
+                            <h3>
+                                Version {{ version.number }}
+                                <a href="#/version/{{ version.id }}/edit?proid={{ versions.id }}">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            </h3>
+                        </span>
+                    </a>
+                    <p>Effective Date: {{ version.effectiveDate | date:'MMMM dd, yyyy' }}</p>
+                    <span ng-if="version.active == true || version.active == null">
+                        <p>Active: Yes</p>
+                    </span>
+                    <span ng-if="version.active == false">
+                        <p>Active: No</p>
+                    </span>
                 </li>
             </ul>
         </div>
