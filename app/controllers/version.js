@@ -1,8 +1,11 @@
 /*global angular*/
 angular.module('controllers')
 
-.controller('versionList', ['$scope', function($scope) {
-    
+.controller('versionList', ['$scope', '$http', '$routeParams', function($scope, $http, $routeParams) {
+    $http.get('/api/versions/' + $routeParams.proid)
+    .then(function(response) {
+        $scope.versions = response.data;
+    });
 }])
 
 .controller('versionNew', ['$http', '$scope', '$routeParams', 'versCount', 'getProc', function($http, $scope, $routeParams, versCount, getProc) {
