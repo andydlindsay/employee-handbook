@@ -163,13 +163,28 @@ angular.module('employeeHandbook', ['ngRoute', 'ngResource', 'formly', 'formlyBo
         templateUrl: '/version/new',
         controller: 'versionNew',
         resolve: {
+            // the count of versions for this procedure, this is used to set the default version number
             versCount: function($route, versCount) {
                 return versCount.getCount($route.current.params.proid).then(function(response) {
                     return response.data; 
                 });
             },
+            // retrieve the information about the procedure that this version belongs to
             getProc: function($route, getProc) {
                 return getProc.getProcedure($route.current.params.proid).then(function(response) {
+                    return response.data; 
+                });
+            }
+        }
+    })
+    
+    .when('/version/:id/edit', {
+        templateUrl: '/version/edit',
+        controller: 'versionEdit',
+        resolve: {
+            // we only need to get the version, we don't need the count of the versions (which sets the version number) as the number has already been assigned and cannot be changed (unlike the display order)
+            getVers: function($route, getVers) {
+                return getVers.getVersion($route.current.params.id).then(function(response) {
                     return response.data; 
                 });
             }

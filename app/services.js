@@ -49,5 +49,12 @@ angular.module('services',['ngResource'])
                 return $http.get('api/versioncount/' + id);
             }
         };
+    }])
+    .factory('getVers', ['$http', function($http) {
+        return {
+            getVersion: function(id) {
+                return $http.get('api/version/' + id + '/edit');
+            }
+        };
     }]);
 })();

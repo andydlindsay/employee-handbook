@@ -343,6 +343,18 @@ router.get('/versions/:id', function(req, res, next) {
     });
 });
 
+router.get('/version/:id/edit', function(req, res, next) {
+    // query the database for the details of the version related to the id in the parameter string
+    models.Version.findOne({
+        attributes: ['id', 'number', 'title', 'effectiveDate', 'reviewDate', 'approved', 'active', 'procedureId', 'userId', 'approvalId'],
+        where: {
+            id: req.params.id
+        }
+    }).then(function(data) {
+        res.send(data);
+    });
+});
+
 //this needs to be redone
 // router.get('/version/:id', function(req, res, next) {
 //     // query database for section information related to the id in the parameter string

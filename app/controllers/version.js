@@ -8,6 +8,59 @@ angular.module('controllers')
     });
 }])
 
+.controller('versionEdit', ['$routeParams', '$http', '$window', '$scope',  'getVers', function($routeParams, $http, $window, $scope, getVersion) {
+    var id = getVersion.id;
+    var number = getVersion.number;
+    var title = getVersion.title;
+    var effectiveDate = getVersion.effectiveDate;
+    var reviewDate = getVersion.reviewDate;
+    var approved = getVersion.approved;
+    var active = getVersion.active;
+    var userId = getVersion.userId;
+    var approvalId = getVersion.approvalId;
+    
+    $scope.version = number;
+    $scope.data = getVersion;
+    
+    $scope.versionSchema = {
+        type: "object",
+        properties: {
+            id: {},
+            title: {
+                type: 'string',
+                title: 'Title',
+                default: title
+            },
+            effectiveDate: {
+                type: 'string',
+                format: 'date',
+                title: 'Effective Date',
+                default: effectiveDate,
+                description: 'The date that this version will be effective after.'
+            },
+            reviewDate: {
+                type: 'string',
+                format: 'date',
+                title: 'Review Date',
+                default: reviewDate,
+                description: 'The date that this version needs to be reviewed on or before.'
+            },
+            approved: {},
+            active: {},
+            userId: {},
+            approvalId: {}
+        }
+    };
+    
+    $scope.versionForm = [
+        '*',
+        {
+            type: 'submit',
+            title: 'Save'
+        }
+    ];
+}])
+
 .controller('versionNew', ['$http', '$scope', '$routeParams', 'versCount', 'getProc', function($http, $scope, $routeParams, versCount, getProc) {
     var number = Number(versCount) + 1;
     $scope.procedure = getProc;
