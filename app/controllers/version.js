@@ -19,34 +19,41 @@ angular.module('controllers')
     var userId = getVersion.userId;
     var approvalId = getVersion.approvalId;
     
-    $scope.version = number;
-    $scope.data = getVersion;
+    $scope.version = getVersion;
     
     $scope.versionSchema = {
         type: "object",
         properties: {
-            id: {},
             title: {
                 type: 'string',
                 title: 'Title',
-                default: title
+                default: title,
+                placeholder: 'title goes here'
             },
             effectiveDate: {
                 type: 'string',
                 format: 'date',
                 title: 'Effective Date',
-                default: effectiveDate,
-                description: 'The date that this version will be effective after.'
+                default: effectiveDate
             },
             reviewDate: {
                 type: 'string',
                 format: 'date',
                 title: 'Review Date',
-                default: reviewDate,
-                description: 'The date that this version needs to be reviewed on or before.'
+                default: reviewDate
             },
-            approved: {},
-            active: {},
+            approved: {
+                type: 'boolean',
+                title: 'Approved',
+                default: approved,
+                readonly: true
+            },
+            active: {
+                type: 'boolean',
+                title: 'Active',
+                default: active,
+                readonly: true
+            },
             userId: {},
             approvalId: {}
         }
