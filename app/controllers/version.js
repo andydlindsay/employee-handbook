@@ -27,8 +27,7 @@ angular.module('controllers')
             title: {
                 type: 'string',
                 title: 'Title',
-                default: title,
-                placeholder: 'title goes here'
+                default: title
             },
             effectiveDate: {
                 type: 'string',
@@ -42,30 +41,27 @@ angular.module('controllers')
                 title: 'Review Date',
                 default: reviewDate
             },
-            approved: {
-                type: 'boolean',
-                title: 'Approved',
-                default: approved,
-                readonly: true
-            },
             active: {
                 type: 'boolean',
                 title: 'Active',
                 default: active,
                 readonly: true
-            },
-            userId: {},
-            approvalId: {}
+            }
         }
     };
     
     $scope.versionForm = [
         '*',
         {
-            type: 'submit',
-            title: 'Save'
+            type: "actions",
+            items: [
+                { type: 'submit', style: 'btn-primary', title: 'Save and Publish' },
+                { type: 'button', title: 'Save as draft', onClick: 'saveAsDraft()'}
+            ]
         }
     ];
+    
+    $scope.saveAsDraft = function() {};
 }])
 
 .controller('versionNew', ['$http', '$scope', '$routeParams', 'versCount', 'getProc', function($http, $scope, $routeParams, versCount, getProc) {
@@ -112,11 +108,11 @@ angular.module('controllers')
     
     // copied from http://www.cheynewallace.com/uploading-to-s3-with-angularjs/
     $scope.creds = {
-        bucket: 'andydlindsay-dev-eh-up',
+        bucket: process.env.AWS_UP_BUCKET,
         bucketFolder: 'img/instruction',
-        destinationBucket: 'andydlindsay-dev-eh-down',
-        access_key: 'AKIAIYFN2ZP4JJJVO7XA',
-        secret_key: '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'
+        destinationBucket: process.env.AWS_DOWN_BUCKET,
+        access_key: process.env.AWS_UP_BUCKET_ACCESS_KEY,
+        secret_key: process.env.AWS_UP_BUCKET_SECRET_KEY
     };
     
     /*global AWS*/ 

@@ -36,5 +36,5 @@ jspm_packages
 # aws credentials
 .aws
 
-# configuration files
-config
+# environment variables
+.env
