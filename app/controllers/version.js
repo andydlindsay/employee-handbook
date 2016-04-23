@@ -61,7 +61,15 @@ angular.module('controllers')
         }
     ];
     
-    $scope.saveAsDraft = function() {};
+    $scope.saveAsDraft = function() {
+        // save record in its current form to the database.
+    };
+    
+    $scope.versSubmit = function() {
+        // save record in its current form to the database. set active to true for this version and false for any other versions that exist for the procedure.
+        // check if any records exist in the instruction table relating to this version. if not, warn before publishing.
+        
+    };
 }])
 
 .controller('versionNew', ['$http', '$scope', '$routeParams', 'versCount', 'getProc', function($http, $scope, $routeParams, versCount, getProc) {

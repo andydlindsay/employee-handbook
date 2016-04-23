@@ -10,7 +10,7 @@ var AWS               = require('aws-sdk');
 
 var app               = express();
 
-// include environment variables
+// include environment variables using dotenv
 require('dotenv').load();
 
 var routes            = require('./routes/index');
