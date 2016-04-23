@@ -11,7 +11,7 @@ var AWS               = require('aws-sdk');
 var app               = express();
 
 // include environment variables
-require('dotenv').config();
+require('dotenv').load();
 
 var routes            = require('./routes/index');
 var userRoute         = require('./routes/users');

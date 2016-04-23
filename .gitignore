@@ -38,3 +38,6 @@ jspm_packages
 
 # environment variables
 .env
+
+# db config file
+config/config.json
