@@ -325,6 +325,10 @@ router.delete('/procedure/:id', function(req, res, next) {
 /*
 **  VERSION
 */
+router.put('/version/:id', function(req, res, next) {
+    
+});
+
 router.get('/versions/:id', function(req, res, next) {
     // query database for version information related to the id in the parameter string
     models.Procedure.findOne({
@@ -354,28 +358,6 @@ router.get('/version/:id/edit', function(req, res, next) {
         res.send(data);
     });
 });
-
-//this needs to be redone
-// router.get('/version/:id', function(req, res, next) {
-//     // query database for section information related to the id in the parameter string
-//     models.Version.findOne(
-//     {
-//         attributes: ['id', 'title', 'desc'],
-//         where: {
-//             id: req.params.id
-//         },
-//         include: [
-//             {
-//                 model: models.Procedure,
-//                 attributes: ['id', 'title', 'desc']
-//             }    
-//         ]
-//     }
-//     ).then(function(data) {
-//             res.send(data);
-//         }
-//     );
-// });
 
 /*
 *   INSTRUCTION

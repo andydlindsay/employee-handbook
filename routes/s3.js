@@ -6,12 +6,12 @@ var router = express.Router();
 router.get('/transfer/:file', function(req, res, next) {
     // config s3 credentials
     console.log('Welcome to transfer');
-    var s3OriginBucket      = 'andydlindsay-dev-eh-up';
-    var s3DestinationBucket = 'andydlindsay-dev-eh-down';
+    var s3OriginBucket      = process.env.AWS_UP_BUCKET;
+    var s3DestinationBucket = process.env.AWS_DOWN_BUCKET;
     var s3BucketFolder      = 'img/instruction';
     var s3File              = req.params.file;
-    var s3AccessKey         = 'AKIAILM2TWICQEQYYSQQ';
-    var s3SecretKey         = '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';
+    var s3AccessKey         = process.env.AWS_DOWN_BUCKET_ACCESS_KEY;
+    var s3SecretKey         = process.env.AWS_DOWN_BUCKET_SECRET_KEY;
     var s3Object            = {};
     var s3TransformedObject = {};
     console.log(s3File);

@@ -45,9 +45,21 @@ angular.module('controllers')
             {
                 type: "actions",
                 items: [
-                    { type: 'submit', style: 'btn-primary', title: 'Save and Publish' },
-                    { type: 'button', title: 'Save as draft', onClick: 'saveAsDraft()'},
-                    { type: 'button', title: 'Edit Instructions', onClick: 'editInstr()'}
+                    { 
+                        type: 'submit', 
+                        style: 'btn-primary', 
+                        title: 'Save and Publish' 
+                    },
+                    { 
+                        type: 'button', 
+                        title: 'Save as draft', 
+                        onClick: 'saveAsDraft()'
+                    },
+                    { 
+                        type: 'button', 
+                        title: 'Edit Instructions', 
+                        onClick: 'editInstr()'
+                    }
                 ]
             }
         ];
@@ -84,16 +96,41 @@ angular.module('controllers')
             {
                 type: "actions",
                 items: [
-                    { type: 'button', style: 'btn-primary', title: 'Review and Renew', onClick: ''},
-                    { type: 'button', title: 'View Instructions', onClick: ''}
+                    { 
+                        type: 'button', 
+                        style: 'btn-primary', 
+                        title: 'Review and Renew', 
+                        onClick: 'renew()'
+                    },
+                    { 
+                        type: 'button', 
+                        title: 'View Instructions', 
+                        onClick: 'viewInstr()'
+                    }
                 ]
             }
         ];
     };
     
+    $scope.renew = function() {
+        // extend the review date by the default increment
+        
+    };
+    
+    $scope.viewInstr = function() {
+        // view the instruction list in read only
+        
+    };
+    
     $scope.saveAsDraft = function() {
         // save record in its current form to the database.
-        
+        $http.put('/api/version/' + $routeParams.id, $scope.version)
+        .success(function(data) {
+            $window.location.href = '#/procedure/' + $routeParams.proid;
+        })
+        .error(function() {
+            
+        });
     };
     
     $scope.editInstr = function() {
