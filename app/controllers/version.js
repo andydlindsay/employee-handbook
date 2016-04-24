@@ -8,61 +8,97 @@ angular.module('controllers')
     });
 }])
 
-.controller('versionEdit', ['$routeParams', '$http', '$window', '$scope',  'getVers', function($routeParams, $http, $window, $scope, getVersion) {
-    var id = getVersion.id;
-    var number = getVersion.number;
+.controller('versionEdit', ['$routeParams', '$http', '$window', '$scope',  'getVers', 'getProc', function($routeParams, $http, $window, $scope, getVersion, getProc) {
     var title = getVersion.title;
     var effectiveDate = getVersion.effectiveDate;
     var reviewDate = getVersion.reviewDate;
-    var approved = getVersion.approved;
-    var active = getVersion.active;
-    var userId = getVersion.userId;
-    var approvalId = getVersion.approvalId;
+    
+    $scope.procTitle = getProc.title;
     
     $scope.version = getVersion;
     
-    $scope.versionSchema = {
-        type: "object",
-        properties: {
-            title: {
-                type: 'string',
-                title: 'Title',
-                default: title
-            },
-            effectiveDate: {
-                type: 'string',
-                format: 'date',
-                title: 'Effective Date',
-                default: effectiveDate
-            },
-            reviewDate: {
-                type: 'string',
-                format: 'date',
-                title: 'Review Date',
-                default: reviewDate
-            },
-            active: {
-                type: 'boolean',
-                title: 'Active',
-                default: active,
-                readonly: true
+    if (!getVersion.active) {
+        $scope.versionSchema = {
+            type: "object",
+            properties: {
+                title: {
+                    type: 'string',
+                    title: 'Title',
+                    default: title
+                },
+                effectiveDate: {
+                    type: 'string',
+                    format: 'date',
+                    title: 'Effective Date',
+                    default: effectiveDate
+                },
+                reviewDate: {
+                    type: 'string',
+                    format: 'date',
+                    title: 'Review Date',
+                    default: reviewDate
+                }
             }
-        }
+        };
+        $scope.versionForm = [
+            '*',
+            {
+                type: "actions",
+                items: [
+                    { type: 'submit', style: 'btn-primary', title: 'Save and Publish' },
+                    { type: 'button', title: 'Save as draft', onClick: 'saveAsDraft()'},
+                    { type: 'button', title: 'Edit Instructions', onClick: 'editInstr()'}
+                ]
+            }
+        ];
+    } else {
+        $scope.versionSchema = {
+            type: "object",
+            properties: {
+                title: {
+                    type: 'string',
+                    title: 'Title',
+                    default: title,
+                    readonly: true
+                },
+                effectiveDate: {
+                    type: 'string',
+                    format: 'date',
+                    title: 'Effective Date',
+                    default: effectiveDate,
+                    readonly: true
+                },
+                reviewDate: {
+                    type: 'string',
+                    format: 'date',
+                    title: 'Review Date',
+                    default: reviewDate,
+                    readonly: true
+                }
+            }
+        };
+        $scope.messageClass = 'text-danger';
+        $scope.message = 'This is the currently active version. It cannot be edited.';
+        $scope.versionForm = [
+            '*',
+            {
+                type: "actions",
+                items: [
+                    { type: 'button', style: 'btn-primary', title: 'Review and Renew', onClick: ''},
+                    { type: 'button', title: 'View Instructions', onClick: ''}
+                ]
+            }
+        ];
     };
-    
-    $scope.versionForm = [
-        '*',
-        {
-            type: "actions",
-            items: [
-                { type: 'submit', style: 'btn-primary', title: 'Save and Publish' },
-                { type: 'button', title: 'Save as draft', onClick: 'saveAsDraft()'}
-            ]
-        }
-    ];
     
     $scope.saveAsDraft = function() {
         // save record in its current form to the database.
+        
+    };
+    
+    $scope.editInstr = function() {
+        // check if the version record needs to be saved before opening the edit instruction form
+        
     };
     
     $scope.versSubmit = function() {
@@ -103,13 +139,6 @@ angular.module('controllers')
                 datepickerOptions: {
                     format: 'MMMM dd,yyyy'
                 }
-            }
-        }, {
-            key: 'active',
-            type: 'checkbox',
-            defaultValue: true,
-            templateOptions: {
-                label: 'Active'
             }
         }
     ];

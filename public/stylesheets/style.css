@@ -2,6 +2,12 @@ body {
     width: 90%;
     margin: auto;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f0f9ff+0,cbebff+47,a1dbff+100 */
+    background: rgb(240,249,255); /* Old browsers */
+    background: -moz-linear-gradient(left,  rgba(240,249,255,1) 0%, rgba(203,235,255,1) 47%, rgba(161,219,255,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  rgba(240,249,255,1) 0%,rgba(203,235,255,1) 47%,rgba(161,219,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  rgba(240,249,255,1) 0%,rgba(203,235,255,1) 47%,rgba(161,219,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff',GradientType=1 ); /* IE6-9 */
 }
 
 .navbar {
@@ -12,6 +18,10 @@ body {
    display: block;
    float: none;
    width:80%;
+}
+
+.navbar {
+    margin-bottom: 0;
 }
 
 .fa-pencil {
@@ -30,6 +40,20 @@ body {
 .instructionImage {
     width: 75%;
     border: 1px solid black;
+}
+
+.greybackground {
+    background-color: #f2f2f2;
+}
+
+.twopxshadow {
+    -webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
+    box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 .formcontainer {

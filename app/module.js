@@ -187,6 +187,12 @@ angular.module('employeeHandbook', ['ngRoute', 'ngResource', 'formly', 'formlyBo
                 return getVers.getVersion($route.current.params.id).then(function(response) {
                     return response.data; 
                 });
+            },
+            // retrieve the information about the procedure that this version belongs to
+            getProc: function($route, getProc) {
+                return getProc.getProcedure($route.current.params.proid).then(function(response) {
+                    return response.data; 
+                });
             }
         }
     })

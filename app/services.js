@@ -1,6 +1,8 @@
 /*global angular*/
 (function() {
 angular.module('services',['ngResource'])
+
+    // return a count of the number of active categories
     .factory('CategoryCount', ['$http', function($http) {
         return {
             getCount: function() {
@@ -8,6 +10,8 @@ angular.module('services',['ngResource'])
             }  
         };
     }])
+    
+    // returns one category that matches the id passed
     .factory('getCats', function($http) {
         return {
             getCategories: function(id) {
@@ -15,6 +19,7 @@ angular.module('services',['ngResource'])
             }  
         };
     })
+    
     .factory('secCount', ['$http', function($http) {
         return {
             getCount: function(id) {
@@ -22,6 +27,7 @@ angular.module('services',['ngResource'])
             }  
         };
     }])
+    
     .factory('getSect', function($http) {
         return {
             getSection: function(id) {
@@ -29,6 +35,7 @@ angular.module('services',['ngResource'])
             }  
         };
     })
+    
     .factory('procCount', ['$http', function($http) {
         return {
             getCount: function(id) {
@@ -36,6 +43,7 @@ angular.module('services',['ngResource'])
             }
         };
     }])
+    
     .factory('getProc', ['$http', function($http) {
         return {
             getProcedure: function(id) {
@@ -43,6 +51,7 @@ angular.module('services',['ngResource'])
             }
         };
     }])
+    
     .factory('versCount', ['$http', function($http) {
         return {
             getCount: function(id) {
@@ -50,6 +59,7 @@ angular.module('services',['ngResource'])
             }
         };
     }])
+    
     .factory('getVers', ['$http', function($http) {
         return {
             getVersion: function(id) {
@@ -57,4 +67,5 @@ angular.module('services',['ngResource'])
             }
         };
     }]);
+    
 })();

@@ -22,7 +22,7 @@ angular.module('directives', [])
 // file uploade directive borrowed from http://www.cheynewallace.com/uploading-to-s3-with-angularjs/
 .directive('file', function() {
     return {
-        restrice: 'AE',
+        restrict: 'AE',
         scope: {
             file: '@'
         },
