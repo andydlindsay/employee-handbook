@@ -12,6 +12,7 @@ angular.module('controllers')
     var title = getVersion.title;
     var effectiveDate = getVersion.effectiveDate;
     var reviewDate = getVersion.reviewDate;
+    var reviewExtend = 365;
     
     $scope.procTitle = getProc.title;
     
@@ -114,12 +115,19 @@ angular.module('controllers')
     
     $scope.renew = function() {
         // extend the review date by the default increment
-        
+        $scope.version.reviewDate = Date() + reviewExtend;
+        $http.put('/api/version/' + $routeParams.id, $scope.version)
+        .success(function(data) {
+            $window.location.href = '#/procedure/' + $routeParams.proid;
+        })
+        .error(function() {
+            
+        });
     };
     
     $scope.viewInstr = function() {
         // view the instruction list in read only
-        
+        $window.location.href = '#/procedure/' + $routeParams.proid;
     };
     
     $scope.saveAsDraft = function() {
@@ -134,14 +142,24 @@ angular.module('controllers')
     };
     
     $scope.editInstr = function() {
-        // check if the version record needs to be saved before opening the edit instruction form
+        // save the version record 
+        
+        // open the edit instruction form
         
     };
     
     $scope.versSubmit = function() {
-        // save record in its current form to the database. set active to true for this version and false for any other versions that exist for the procedure.
         // check if any records exist in the instruction table relating to this version. if not, warn before publishing.
         
+        // save record in its current form to the database. set active to true for this version
+        // set active to false for any other versions that exist for the procedure
+        $http.put('/api/activeversion/' + $routeParams.id, $scope.version)
+        .success(function(data) {
+            $window.location.href = '#/procedure/' + $routeParams.proid;
+        })
+        .error(function() {
+             
+        });
     };
 }])
 

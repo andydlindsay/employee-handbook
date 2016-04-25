@@ -325,8 +325,75 @@ router.delete('/procedure/:id', function(req, res, next) {
 /*
 **  VERSION
 */
-router.put('/version/:id', function(req, res, next) {
+router.put('/activeversion/:id', function(req, res, next) {
+    // variable declarations
+    var number = req.body.number;
+    var title = req.body.title;
+    var effectiveDate = req.body.effectiveDate;
+    var reviewDate = req.body.reviewDate;
+    var approved = req.body.approved;
+    var active = true;
+    var procedureId = req.body.procedureId;
     
+    // update the specified record and set active to true
+    models.Version.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(function(version) {
+        if(version) {
+            version.updateAttributes({
+                number: number,
+                title: title,
+                effectiveDate: effectiveDate,
+                reviewDate: reviewDate,
+                approved: approved,
+                active: active
+            }).then(function(version) {
+                // set active to false for all other records related to this procedure (if any)
+                // try removing 'return' and using res.send to return the response; might fix page reload problem
+                return models.Version.update(
+                    {
+                        active: false
+                    }, {
+                        where: {
+                            procedureId: procedureId,
+                            id: {
+                                ne: req.params.id
+                            }
+                        }
+                    }
+                );
+            });   
+        }
+    });
+});
+
+router.put('/version/:id', function(req, res, next) {
+    var number = req.body.number;
+    var title = req.body.title;
+    var effectiveDate = req.body.effectiveDate;
+    var reviewDate = req.body.reviewDate;
+    var approved = req.body.approved;
+    var active = req.body.active;
+    models.Version.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(function(version) {
+        if(version) {
+            version.updateAttributes({
+                number: number,
+                title: title,
+                effectiveDate: effectiveDate,
+                reviewDate: reviewDate,
+                approved: approved,
+                active: active
+            }).then(function(version) {
+                res.send(version);         
+            });   
+        }
+    });
 });
 
 router.get('/versions/:id', function(req, res, next) {
