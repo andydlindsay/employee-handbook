@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 // GET section detail 
+router.get('/draft', function(req, res, next) {
+    res.render('templates/proceduredraft'); 
+});
+
 router.get('/edit', function(req, res, next) {
     res.render('templates/procedureedit');
 });

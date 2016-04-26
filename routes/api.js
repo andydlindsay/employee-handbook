@@ -332,7 +332,6 @@ router.put('/activeversion/:id', function(req, res, next) {
     var effectiveDate = req.body.effectiveDate;
     var reviewDate = req.body.reviewDate;
     var approved = req.body.approved;
-    var active = true;
     var procedureId = req.body.procedureId;
     
     // update the specified record and set active to true
@@ -348,11 +347,11 @@ router.put('/activeversion/:id', function(req, res, next) {
                 effectiveDate: effectiveDate,
                 reviewDate: reviewDate,
                 approved: approved,
-                active: active
+                active: true
             }).then(function(version) {
                 // set active to false for all other records related to this procedure (if any)
                 // try removing 'return' and using res.send to return the response; might fix page reload problem
-                return models.Version.update(
+                models.Version.update(
                     {
                         active: false
                     }, {
@@ -364,6 +363,7 @@ router.put('/activeversion/:id', function(req, res, next) {
                         }
                     }
                 );
+                res.send(version);
             });   
         }
     });
@@ -376,11 +376,8 @@ router.put('/version/:id', function(req, res, next) {
     var reviewDate = req.body.reviewDate;
     var approved = req.body.approved;
     var active = req.body.active;
-    models.Version.findOne({
-        where: {
-            id: req.params.id
-        }
-    }).then(function(version) {
+    models.Version.findById(req.params.id)
+    .then(function(version) {
         if(version) {
             version.updateAttributes({
                 number: number,

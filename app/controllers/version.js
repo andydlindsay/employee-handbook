@@ -134,7 +134,7 @@ angular.module('controllers')
         // save record in its current form to the database.
         $http.put('/api/version/' + $routeParams.id, $scope.version)
         .success(function(data) {
-            $window.location.href = '#/procedure/' + $routeParams.proid;
+            $window.location.href = '#/procedure/draft/' + $scope.version.procedureId;
         })
         .error(function() {
             
