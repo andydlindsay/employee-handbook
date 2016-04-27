@@ -18,6 +18,9 @@
   "dependencies": {
     "angular-schema-form-bootstrap": "^0.2.0",
     "angular-schema-form-datepicker": "^0.4.0",
-    "aws-sdk": "aws-sdk-js#^2.2.43"
+    "aws-sdk": "aws-sdk-js#^2.2.43",
+    "moment": "^2.13.0",
+    "angular-moment": "^0.10.3",
+    "angular-momentjs": "^0.2.2"
   }
 }

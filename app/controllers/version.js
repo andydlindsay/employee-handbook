@@ -8,11 +8,10 @@ angular.module('controllers')
     });
 }])
 
-.controller('versionEdit', ['$routeParams', '$http', '$window', '$scope',  'getVers', 'getProc', function($routeParams, $http, $window, $scope, getVersion, getProc) {
+.controller('versionEdit', ['$routeParams', '$http', '$window', '$scope',  'getVers', 'getProc', '$moment', function($routeParams, $http, $window, $scope, getVersion, getProc, $moment) {
     var title = getVersion.title;
     var effectiveDate = getVersion.effectiveDate;
     var reviewDate = getVersion.reviewDate;
-    var reviewExtend = 365;
     
     $scope.procTitle = getProc.title;
     
@@ -111,11 +110,13 @@ angular.module('controllers')
                 ]
             }
         ];
-    };
+    }
     
     $scope.renew = function() {
         // extend the review date by the default increment
-        $scope.version.reviewDate = Date() + reviewExtend;
+        var date = $moment();
+        $scope.version.reviewDate = date.add(365, 'days');
+        // save the record
         $http.put('/api/version/' + $routeParams.id, $scope.version)
         .success(function(data) {
             $window.location.href = '#/procedure/' + $routeParams.proid;
@@ -149,6 +150,13 @@ angular.module('controllers')
     };
     
     $scope.versSubmit = function() {
+        // check if effective date is in the future, if it is, change it to today
+        // in order to compare dates, you have to create Date objects
+        var effDate = new Date($scope.version.effectiveDate);
+        var today = new Date();
+        if (effDate > today) {
+            $scope.version.effectiveDate = today;
+        }
         // check if any records exist in the instruction table relating to this version. if not, warn before publishing.
         
         // save record in its current form to the database. set active to true for this version

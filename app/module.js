@@ -1,5 +1,5 @@
 /*global angular*/
-angular.module('employeeHandbook', ['ngRoute', 'ngResource', 'formly', 'formlyBootstrap', 'controllers', 'services', 'directives', 'ngAnimate'])
+angular.module('employeeHandbook', ['ngRoute', 'ngResource', 'formly', 'formlyBootstrap', 'controllers', 'services', 'directives', 'ngAnimate', 'angular-momentjs'])
 
 // routes 
 .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) { 
