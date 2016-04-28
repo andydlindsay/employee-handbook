@@ -1,27 +1,27 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="jumbotron">
+        <div class="jumbotron text-center">
             <h1>{{ chapter.title }}</h1>
-            <p>{{ chapter.desc }}</p>
+            <h3>{{ chapter.desc }}</h3>
             <a class="btn btn-primary" href="#/section/new?catid={{ chapter.id }}">Add a new section</a>
         </div>
         <div>
             <ul>
-                <li class="nostyle"><h2>Sections</h2></li>
+                <li class="nostyle text-center lead"><h1>Sections</h1></li>
             </ul>
             <ul>
-                <li class="well nostyle" ng-repeat="section in chapter.Sections">
+                <li class="well nostyle text-center" ng-repeat="section in chapter.Sections">
                     <a href="#/section/{{ section.id }}">
-                        <span><h3>{{ section.title }}
+                        <span><h2>{{ section.title }}
                             <a href="#/section/{{ section.id }}/edit?catid={{ chapter.id }}">
                                 <i class="fa fa-pencil"></i>
                             </a>
                             <a href="#/section/{{ section.id }}/delete?catid={{ chapter.id }}">
                                 <i class="fa fa-trash"></i>
                             </a>
-                        </h3></span>
+                        </h2></span>
                     </a>
-                    <p>{{ section.desc }}</p>
+                    <h4>{{ section.desc }}</h4>
                 </li>
             </ul>
         </div>
