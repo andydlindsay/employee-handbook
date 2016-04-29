@@ -1,27 +1,27 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="jumbotron">
+        <div class="jumbotron text-center">
             <h1>{{ section.title }}</h1>
-            <p>{{ section.desc }}</p>
+            <h3>{{ section.desc }}</h3>
             <a class="btn btn-primary" href="#/procedure/new?secid={{ section.id }}">Add a new procedure</a>
         </div>
         <div>
             <ul>
-                <li class="nostyle"><h2>Procedures</h2></li>
+                <li class="nostyle text-center lead"><h1>Procedures</h1></li>
             </ul>
             <ul>
-                <li class="well nostyle" ng-repeat="procedure in section.Procedures">
+                <li class="well nostyle text-center" ng-repeat="procedure in section.Procedures">
                     <a href="#/procedure/{{ procedure.id }}">
-                        <span><h3>{{ procedure.title }}
+                        <span><h2>{{ procedure.title }}
                             <a href="#/procedure/{{ procedure.id }}/edit?secid={{ section.id }}">
                                 <i class="fa fa-pencil"></i>
                             </a>
                             <a href="#/procedure/{{ procedure.id }}/delete?secid={{ section.id }}">
                                 <i class="fa fa-trash"></i>
                             </a>
-                        </h3></span>
+                        </h2></span>
                     </a>
-                    <p>{{ procedure.desc }}</p>
+                    <h4>{{ procedure.desc }}</h4>
                 </li>
             </ul>
         </div>

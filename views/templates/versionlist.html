@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="jumbotron">
+        <div class="jumbotron text-center">
             <h1>Versions of '{{ versions.title }}'</h1>
             <a class="btn btn-primary" href="#/version/new?proid={{ versions.id }}">Create a new version</a>
         </div> <!-- jumbotron -->
         <div>
             <ul>
-                <li class="nostyle"><h2>Versions</h2></li>
+                <li class="nostyle lead"><h1>Versions</h1></li>
             </ul>
             <ul>
                 <li class="well nostyle" ng-repeat="version in versions.Versions">
@@ -20,7 +20,7 @@
                             </h3>
                         </span>
                     </a>
-                    <p>Title: {{ version.title }}</p>
+                    <p>Title: {{ version.title || 'None' }}</p>
                     <p>Effective Date: {{ version.effectiveDate | date:'MMMM dd, yyyy' }}</p>
                     <span ng-if="version.active == true">
                         <p>Active: Yes</p>
