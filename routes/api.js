@@ -291,8 +291,8 @@ router.post('/procedure', function(req, res, next) {
 router.get('/versioncount/:id', function(req, res, next) {
     models.Version.count({
         where: {
-            procedureId: req.params.id,
-            active: true
+            procedureId: req.params.id
+            // active: true
         }
     })
     .then(function(data) {
@@ -366,6 +366,25 @@ router.put('/activeversion/:id', function(req, res, next) {
                 res.send(version);
             });   
         }
+    });
+});
+
+router.post('/version', function(req, res, next) {
+    var procedureId = req.body.procedureId;
+    var title = req.body.title;
+    var number = req.body.number;
+    var effectiveDate = req.body.effectiveDate;
+    var reviewDate = req.body.reviewDate;
+    models.Version.create({
+        id: 32,
+        procedureId: procedureId,
+        title: title,
+        number: number,
+        effectiveDate: effectiveDate,
+        reviewDate: reviewDate
+    })
+    .then(function(data) {
+        res.send(data);
     });
 });
 

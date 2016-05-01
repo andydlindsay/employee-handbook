@@ -171,131 +171,67 @@ angular.module('controllers')
     };
 }])
 
-.controller('versionNew', ['$http', '$scope', '$routeParams', 'versCount', 'getProc', function($http, $scope, $routeParams, versCount, getProc) {
+.controller('versionNew', ['$http', '$scope', '$routeParams', 'versCount', 'getProc', '$moment', '$window', function($http, $scope, $routeParams, versCount, getProc, $moment, $window) {
     var number = Number(versCount) + 1;
     $scope.procedure = getProc;
     $scope.version = {};
-    $scope.versionFields = [
-        {
-            key: 'procedureId',
-            type: 'input',
-            defaultValue: $routeParams.proid,
-            templateOptions: {
-                type: 'hidden'
-            }
-        }, {
-            key: 'number',
-            type: 'input',
-            defaultValue: number,
-            templateOptions: {
-                type: 'text',
-                label: 'Number',
-                required: true
-            }
-        }, {
-            key: 'effectiveDate',
-            type: 'input',
-            templateOptions: {
-                label: 'Effective Date',
-                type: 'datepicker',
-                datepickerPopup: 'dd-MMMM-yyyy',
-                datepickerOptions: {
-                    format: 'MMMM dd,yyyy'
-                }
-            }
-        }
-    ];
-    
-    // copied from http://www.cheynewallace.com/uploading-to-s3-with-angularjs/
-    $scope.creds = {
-        bucket: process.env.AWS_UP_BUCKET,
-        bucketFolder: 'img/instruction',
-        destinationBucket: process.env.AWS_DOWN_BUCKET,
-        access_key: process.env.AWS_UP_BUCKET_ACCESS_KEY,
-        secret_key: process.env.AWS_UP_BUCKET_SECRET_KEY
-    };
-    
-    /*global AWS*/ 
-    $scope.upload = function() {
-        // Configure The S3 Object 
-        AWS.config.update({ accessKeyId: $scope.creds.access_key, secretAccessKey: $scope.creds.secret_key });
-        AWS.config.region = 'us-east-1';
-        var bucket = new AWS.S3({ params: { Bucket: $scope.creds.bucket + '/' + $scope.creds.bucketFolder } });
-                
-        if($scope.file) {
-            // disable save button to prevent duplicate uploads
-            angular.element(document.getElementById('imageSave'))[0].disabled = true;
-            var date = new Date();
-            var fileKey = date.getTime() + '-' + $scope.file.name;
-            var params = { Key: fileKey, ContentType: $scope.file.type, Body: $scope.file, ServerSideEncryption: 'AES256' };
-            
-            bucket.putObject(params, function(err, data) {
-              if(err) {
-                // There Was An Error With Your S3 Config
-                alert(err.message);
-                return false;
-              }
-              else {
-                // Success!
-                alert('Upload Done');
-                // enable save button
-                angular.element(document.getElementById('imageSave'))[0].disabled = false;
-                $http.get('/s3/transfer/' + fileKey)
-                .then(function(response) {
-                    console.log(response);
-                });
-              }
-            })
-            .on('httpUploadProgress',function(progress) {
-                  // Log Progress Information
-                  console.log(Math.round(progress.loaded / progress.total * 100) + '% done');
-            });
-        }
-        else {
-            // No File Selected
-            alert('No File Selected');
-        }
-    };
-    // end of copy & paste
-
-    $scope.instructionSchema = {
+    $scope.version.procedureId = getProc.id;
+    $scope.versionSchema = {
         type: "object",
         properties: {
-            firstName: {
+            number: {
                 type: 'string',
-                minLength: 2,
-                title: 'First Name'
+                title: 'Number',
+                default: number,
+                readonly: true
             },
-            surname: {
+            title: {
                 type: 'string',
-                minLength: 2,
-                title: 'Surname',
-                description: 'The name your momma gave ya.'
+                title: 'Title'
             },
-            birthdate: {
+            effectiveDate: {
                 type: 'string',
                 format: 'date',
-                title: 'Birthdate',
-                minDate: new Date()
+                title: 'Effective Date'
+            },
+            reviewDate: {
+                type: 'string',
+                format: 'date',
+                title: 'Review Date'
             }
         }
     };
-    $scope.instructionForm = [
+    $scope.versionForm = [
         '*',
         {
-            type: 'submit',
-            title: 'Save'
-        }    
+            type: "actions",
+            items: [
+                { 
+                    type: 'button', 
+                    title: 'Save as draft', 
+                    onClick: 'saveAsDraft()'
+                },
+                { 
+                    type: 'button', 
+                    title: 'Edit Instructions', 
+                    onClick: 'editInstr()'
+                }
+            ]
+        }
     ];
-    $scope.instruction = {};
-    $scope.instrSubmit = function() {
-        console.log('instruction: ' + $scope.instruction);
-        $scope.upload();
+    
+    $scope.saveAsDraft = function() {
+        // save record in its current form to the database
+        $http.post('/api/version', $scope.version)
+        .success(function(data) {
+            $window.location.href = '#/procedure/draft/' + $scope.version.procedureId;
+        })
+        .error(function() {
+            
+        });
     };
-    $scope.fileSubmit = function() {
-        console.log($scope.file);
-    };
-    $scope.verSubmit = function() {
-        console.log($scope.instruction);
+    
+    $scope.editInstr = function() {
+        
     };
 }]);
