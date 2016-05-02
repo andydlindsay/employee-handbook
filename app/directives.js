@@ -6,16 +6,17 @@ angular.module('directives', [])
     return {
         // restrict = what can call it: (A)ttribute, (E)lement, (C)lass, co(M)ment -> defaults to AE
         restrict: 'AE',
+        controller: 'instructionFormController',
         templateUrl: '/instruction/instructionform',
         // replace = replace the html element used to call the directive
-        replace: true,
+        replace: true
         // isolated scope
         // '@' = text, '=' = two way binding, '<' = one way binding, '&' = expression/calculation
-        scope: {
-            // example personName: '@' as person-name on html
-            // or personNameSpecial: '@personName' to alias the calling element/attribute
+        // scope: {
+        //     // example personName: '@' as person-name on html
+        //     // or personNameSpecial: '@personName' to alias the calling element/attribute
             
-        }
+        // }
     };
 })
 

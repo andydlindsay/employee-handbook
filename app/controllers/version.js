@@ -12,6 +12,7 @@ angular.module('controllers')
     var title = getVersion.title;
     var effectiveDate = getVersion.effectiveDate;
     var reviewDate = getVersion.reviewDate;
+    var versid = getVersion.id;
     
     $scope.procTitle = getProc.title;
     
@@ -128,7 +129,7 @@ angular.module('controllers')
     
     $scope.viewInstr = function() {
         // view the instruction list in read only
-        $window.location.href = '#/procedure/' + $routeParams.proid;
+        $window.location.href = '#/instruction/list?versid=' + versid;
     };
     
     $scope.saveAsDraft = function() {
@@ -146,7 +147,7 @@ angular.module('controllers')
         // save the version record 
         
         // open the edit instruction form
-        
+        $window.location.href = '#/instruction/list?versid=' + versid;
     };
     
     $scope.versSubmit = function() {

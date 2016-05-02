@@ -11,6 +11,15 @@ angular.module('services',['ngResource'])
         };
     }])
     
+    // return a count of all instructions associated with the version
+    .factory('instrCount', ['$http', function($http) {
+        return {
+            getCount: function(id) {
+                return $http.get('/api/instructioncount/' + id);
+            }
+        };
+    }])
+    
     // returns one category that matches the id passed
     .factory('getCats', function($http) {
         return {

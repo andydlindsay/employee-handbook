@@ -349,7 +349,7 @@ router.put('/activeversion/:id', function(req, res, next) {
                 approved: approved,
                 active: true
             }).then(function(version) {
-                // set active to false for all other records related to this procedure (if any)
+                // set active to false for all other records related to this procedure (if any) where it is currently true
                 // try removing 'return' and using res.send to return the response; might fix page reload problem
                 models.Version.update(
                     {
@@ -359,7 +359,8 @@ router.put('/activeversion/:id', function(req, res, next) {
                             procedureId: procedureId,
                             id: {
                                 ne: req.params.id
-                            }
+                            },
+                            active: true
                         }
                     }
                 );
@@ -376,7 +377,7 @@ router.post('/version', function(req, res, next) {
     var effectiveDate = req.body.effectiveDate;
     var reviewDate = req.body.reviewDate;
     models.Version.create({
-        id: 32,
+        id: 102,
         procedureId: procedureId,
         title: title,
         number: number,
@@ -445,6 +446,61 @@ router.get('/version/:id/edit', function(req, res, next) {
 /*
 *   INSTRUCTION
 */
+router.get('/instructioncount/:id', function(req, res, next) {
+    // count the number of instructions associated with the specified version
+    models.Instruction.count({
+        where: {
+            versionId: req.params.id
+        }
+    }).then(function(data) {
+        res.send(data.toString());
+    });
+});
+
+router.post('/instruction', function(req, res, next) {
+    var order = req.body.order;
+    var instruction = req.body.instruction;
+    var image = req.body.image;
+    var imageCaption = req.body.imageCaption;
+    var versionId = req.body.versionId;
+    models.Instruction.create({
+        id: 1001,
+        order: order,
+        instruction: instruction,
+        image: image,
+        imageCaption: imageCaption,
+        versionId: versionId
+    }).then(function(data) {
+        res.send(data);
+    }); 
+});
+
+router.get('/instructions/:id', function(req, res, next) {
+    // query the database and return version info, procedure title, and all associated instructions
+    models.Version.findOne({
+        attributes: ['id', 'number'],
+        where: {
+            id: req.params.id
+        },
+        order: [
+            [models.Instruction, 'order', 'ASC']
+        ],
+        include: [
+            {
+                model: models.Procedure,
+                attributes: ['id', 'title']
+            },
+            {
+                model: models.Instruction,
+                attributes: ['id', 'order', 'instruction', 'image', 'imageCaption'],
+                required: false
+            }    
+        ]
+    }).then(function(version) {
+        res.send(version); 
+    });
+});
+
 router.get('/procedure/:id', function(req, res, next) {
     // query database for instruction information related to the id in the parameter string
     models.Procedure.findOne(

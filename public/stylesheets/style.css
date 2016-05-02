@@ -50,6 +50,18 @@ ol, ul {
     padding: 0px;    
 }
 
+textarea {
+    resize: vertical;
+}
+
+pre {
+    white-space: pre-wrap;       /* CSS 3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
 .twopxshadow {
     -webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);

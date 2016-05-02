@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron text-center">
+            <h1>Version {{ version.number }} of '{{ version.Procedure.title }}'</h1>
+            <h3 class="{{ messageClass }}">{{ message }}</h3>
+        </div> <!-- jumbotron -->
+        <div>
+            <ul>
+                <li class="nostyle lead"><h1>Instruction List</h1></li>
+            </ul>
+            <!-- display a list of current instructions -->
+            <ul>
+                <li class="well nostyle" ng-repeat="instruction in version.Instructions">
+                    <p>
+                        <span><b>{{ instruction.order }}.</b> </span>
+                        <span>{{ instruction.instruction }}</span>
+                    </p>
+                <span ng-if="instruction.image">
+                    <p>image preview</p>
+                    <p>Image Caption: {{ instruction.imageCaption }}</p>    
+                </span>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <!-- display the create instruction form -->
+            <eh-instruction-form></eh-instruction-form>
+        </div>
+    </div> <!-- col-md-12 -->
+</div> <!-- row -->

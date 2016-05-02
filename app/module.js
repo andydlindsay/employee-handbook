@@ -147,7 +147,22 @@ angular.module('employeeHandbook', ['ngRoute', 'ngResource', 'formly', 'formlyBo
         controller: 'procedureDetail',
         resolve: {
             versCount: function($route, versCount) {
-                return versCount.getCount($route.current.params.id).then(function(response) {
+                return versCount.getCount($route.current.params.id)
+                .then(function(response) {
+                    return response.data; 
+                });
+            }
+        }
+    })
+    
+    .when('/instruction/list', {
+        templateUrl: '/instruction/list',
+        controller: 'instructionList',
+        resolve: {
+            // get the count of current instructions for the specified version
+            instrCount: function($route, instrCount) {
+                return instrCount.getCount($route.current.params.versid)
+                .then(function(response) {
                     return response.data; 
                 });
             }
