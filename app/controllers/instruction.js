@@ -1,7 +1,7 @@
 /*global angular*/
 angular.module('controllers')
 
-.controller('instructionFormController', ['$scope', '$http', '$route', function($scope, $http, $route) {
+.controller('instructionFormController', ['$scope', '$http', '$route', '$window', function($scope, $http, $route, $window) {
     // generate instruction form with angular schema form
     $scope.instruction = {};
     $scope.instruction.versionId = $scope.versionId;
@@ -52,7 +52,8 @@ angular.module('controllers')
     $scope.instrSubmit = function() {
         $http.post('/api/instruction', $scope.instruction)
         .success(function(data) {
-            $route.reload();
+            $window.location.href = "#/instruction/list?versid=" + $scope.instruction.versionId + "#form";
+            // $route.reload();
         })
         .error(function() {
             

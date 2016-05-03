@@ -377,7 +377,6 @@ router.post('/version', function(req, res, next) {
     var effectiveDate = req.body.effectiveDate;
     var reviewDate = req.body.reviewDate;
     models.Version.create({
-        id: 102,
         procedureId: procedureId,
         title: title,
         number: number,
@@ -464,7 +463,6 @@ router.post('/instruction', function(req, res, next) {
     var imageCaption = req.body.imageCaption;
     var versionId = req.body.versionId;
     models.Instruction.create({
-        id: 1001,
         order: order,
         instruction: instruction,
         image: image,
