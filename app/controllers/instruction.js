@@ -52,7 +52,7 @@ angular.module('controllers')
     $scope.instrSubmit = function() {
         $http.post('/api/instruction', $scope.instruction)
         .success(function(data) {
-            $window.location.href = "#/instruction/list?versid=" + $scope.instruction.versionId + "#form";
+            $window.location.href = "#/instruction/list?versid=" + $scope.instruction.versionId + "#instrform";
             // $route.reload();
         })
         .error(function() {
